@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <territory>
     <id>arab-union-TBD</id>
-    <short-form-name>Arab Union</short-form-name>
+    <short-form-name>Arab Federation</short-form-name>
     <long-form-name type="none"/>
     <type-of-territory>independent-state</type-of-territory>
     <valid-since/>
     <valid-until/>
-    <exists-on-todays-map>false</exists-on-todays-map>
+    <exists-on-todays-map/>
     <predecessors/>
     <successors>
         <successor>jordan</successor>
