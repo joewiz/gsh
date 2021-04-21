@@ -19,7 +19,7 @@
     <sources>
         <source>https://www.cia.gov/library/publications/the-world-factbook/geos/eg.html</source>
         <source>https://www.cia.gov/library/publications/the-world-factbook/geos/sy.html</source>
-        <source>http://history.state.gov/countries/egypt</source>
-        <source>http://history.state.gov/countries/syria</source>
+        <source>https://history.state.gov/countries/egypt</source>
+        <source>https://history.state.gov/countries/syria</source>
     </sources>
 </territory>
