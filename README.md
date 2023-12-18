@@ -1,4 +1,7 @@
 # gsh
+
+[![exist-db CI](https://github.com/joewiz/gsh/actions/workflows/build.yml/badge.svg)](https://github.com/joewiz/gsh/actions/workflows/build.yml)
+
 Draft work on historical country names database, aka, geospatial history (gsh) project.
 
 ## Scope
@@ -25,7 +28,7 @@ This database takes INR's lists, which capture today's map, and introduces a his
 
 There may be additional reasons for changes; if you find one that does not fit into one of the above five categories, please describe it as best you can in your notes.
 
-## Setup
+## Build
 
 To get started, clone the repository to your desktop
 
@@ -35,16 +38,14 @@ To run the app (assumes ant and eXist)
         ```shell
         ant
         ```
-    
-    2. DEV environment: The replication triggers for the producer server are enabled in  `collection.xconf` and point to the dev server's replication service IP.
-        ```shell
-        ant xar-dev
-        ```
-    
-    3. PROD environment: Same as in 2. but for PROD destination
-        ```shell
-        ant xar-prod
-        ```
+
+        1. Since Releases have been automated when building locally you might want to supply your own version number (e.g. `X.X.X`) like this:
+
+    ```shell
+    ant -Dapp.version=X.X.X
+    ```
+
+## Install
 
 - Open eXist Dashboard > Package Manager
 - Click on the `+` icon and drag the `build/gsh-*.xar` file onto the window 
@@ -63,6 +64,16 @@ To edit the data (assumes oXygen)
 - Also, in the app, cells with likely problems are flagged by `*` and have a yellow background
 - Commit fixes as pull requests
 
-To automate build and deploy procedure (to eliminate the Dashboard step above)
-- Edit build properties with eXist URI, dba username, password
-- Run `ant install`
+## Release
+
+Releases for this data package are automated. Any commit to the `master` branch will trigger the release automation.
+
+All commit message must conform to [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines) to determine semantic versioning of releases, please adhere to these conventions, like so:
+
+| Commit message  | Release type |
+|-----------------|--------------|
+| `fix(pencil): stop graphite breaking when too much pressure applied` | Patch Release |
+| `feat(pencil): add 'graphiteWidth' option` | ~~Minor~~ Feature Release |
+| `perf(pencil): remove graphiteWidth option`<br/><br/>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br/>`The default graphite width of 10mm is always used for performance reasons.` | ~~Major~~ Breaking Release |
+
+When opening PRs commit messages are checked using commitlint.
