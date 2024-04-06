@@ -3,3 +3,6 @@ build/*
 .existdb.json
 expath-pkg.xml
 repo.xml
+.vscode/
+.idea/
+node_modules/

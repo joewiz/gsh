@@ -4,6 +4,7 @@
         <name>gsh</name>
         <url>http://history.state.gov/ns/pkg/apps/gsh</url>
         <title>Geospatial History of U.S. Foreign Relations</title>
-        <version>0.5.1</version>
+        <!-- VERSION SET AUTOMATICALLY DO NOT CHANGE -->
+        <!-- <version>0.5.1</version> -->
     </app>   
 </root>
