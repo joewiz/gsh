@@ -3,7 +3,7 @@ xquery version "3.0";
 module namespace th="http://history.state.gov/ns/xquery/territories-html";
 
 import module namespace gsh="http://history.state.gov/ns/xquery/geospatialhistory" at "/db/apps/gsh/modules/gsh.xqm";
-import module namespace console="http://exist-db.org/xquery/console";
+import module namespace console="http://exist-db.org/xquery/console" at "java:org.exist.console.xquery.ConsoleModule";
 
 declare function th:landing-page-breadcrumbs() {
     <li><a href="{$gsh:territories-home}">Territories</a></li>
