@@ -1,6 +1,7 @@
 xquery version "3.0";
 
-import module namespace xdb="http://exist-db.org/xquery/xmldb";
+import module namespace xmldb="http://exist-db.org/xquery/xmldb";
+import module namespace file="http://exist-db.org/xquery/file";
 
 (: The following external variables are set by the repo:deploy function :)
 
@@ -15,7 +16,7 @@ declare function local:mkcol-recursive($collection, $components) {
     if (exists($components)) then
         let $newColl := concat($collection, "/", $components[1])
         return (
-            xdb:create-collection($collection, $components[1]),
+            xmldb:create-collection($collection, $components[1]),
             local:mkcol-recursive($newColl, subsequence($components, 2))
         )
     else
