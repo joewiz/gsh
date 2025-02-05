@@ -42,23 +42,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
-      - run: ant -Dapp.version=1.0.0-SNAPSHOT
+      - run: ant
 
       # Install
-      # Use Stock Image with default apps includes monex
-      # see #20
-      - name: Start exist containers
+      - name: Start exist-ci containers
         run: |
-          docker create -it -p 8080:8080 --name exist --rm --health-interval=2s --health-start-period=4s duncdrum/existdb:${{ matrix.exist-version }}
-          docker cp ./build/*.xar exist:exist/autodeploy/zzz.xar
-          docker start exist
-      
-      - name: wait for install to finish
-        timeout-minutes: 5
-        run: |
-          while ! docker logs exist | grep -q "Server has started"; \
-          do sleep 2s; \
-          done 
+          docker run -dit -p 8080:8080 -v ${{ github.workspace }}/build:/exist/autodeploy \
+          --name exist --rm --health-interval=2s --health-start-period=4s \
+          duncdrum/existdb:${{ matrix.exist-version }}
+          sleep 10s
 
       # Test       
       - name: Run test
