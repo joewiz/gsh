@@ -45,20 +45,18 @@ jobs:
       - run: ant -Dapp.version=1.0.0-SNAPSHOT
 
       # Install
-      # Use Stock Image with default apps includes monex
-      # see #20
-      - name: Start exist containers
+      - name: Start exist-ci containers
         run: |
           docker create -it -p 8080:8080 --name exist --rm --health-interval=2s --health-start-period=4s duncdrum/existdb:${{ matrix.exist-version }}
           docker cp ./build/*.xar exist:exist/autodeploy/zzz.xar
           docker start exist
-      
+
       - name: wait for install to finish
         timeout-minutes: 5
         run: |
           while ! docker logs exist | grep -q "Server has started"; \
           do sleep 2s; \
-          done 
+          done
 
       # Test       
       - name: Run test
@@ -67,6 +65,13 @@ jobs:
       # Lint commit messages
       - name: lint commit message
         uses: wagoid/commitlint-github-action@v6
+
+      # Commit repo.xml file
+      - name: Commit and Push
+        if: ${{ matrix.java-version == 17 && github.event_name == 'push' && github.ref != 'refs/heads/master'}}
+        uses: actions-x/commit@v6
+        with:
+          message: "fix(repo.xml): update [skip ci]"
 
   release:
     name: Release
